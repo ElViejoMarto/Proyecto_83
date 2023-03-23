@@ -4,12 +4,14 @@ color = "#D95EF8"
 var mouseEvent = "empty";
 var last_position_of_x, last_position_of_y;
 var current_position_of_x, current_position_of_y;
+var last_position_of_touch_x, last_position_of_touch_y;
 
 canvas.addEventListener("touchmove", my_touchmove);
 canvas.addEventListener("mousedown", mi_mouseAbajo);
 canvas.addEventListener("mouseup", mi_mouseArriba);
 canvas.addEventListener("mouseleave", mi_mouseLeave);
 canvas.addEventListener("mousemove", mi_mousemove);
+canvas.addEventListener("touchstart", my_touchstart);
 
 function mi_mouseAbajo(e) {
     color = document.getElementById("color").value;
@@ -66,6 +68,12 @@ function limpiarArea() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     last_position_of_x = "empty";
     last_position_of_x = "empty";
+}
+
+function my_touchstart() {
+    ctx.strokeStyle = color;
+    last_position_of_touch_x = e.touches[0].clientX-canvas.offsetLeft;
+    last_position_of_touch_y = e.touches[0].clientY-canvas.offsetTop;
 }
 
 function my_touchmove(e) {
